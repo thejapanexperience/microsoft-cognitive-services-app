@@ -1,9 +1,9 @@
-#TWITTER API
+#MICROSOFT COGNITIVE SERVICES API
 
 ##Link to Heroku
-https://shrouded-eyrie-47823.herokuapp.com/
+<!-- https://shrouded-eyrie-47823.herokuapp.com/ -->
 
-##Made by Sammi and Richard
+##Made by Donovan and Richard
 
 ---
 
