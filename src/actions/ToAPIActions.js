@@ -6,6 +6,11 @@ const ToAPIActions = {
     API.imageAnalyse(url)
   },
 
+  audioAnalyse(string) {
+    console.log('in ToAPIActions');
+    API.audioAnalyse(string)
+  },
+
   saveImage(analysis){
     console.log('in ToAPIActions');
     API.saveImage(analysis)

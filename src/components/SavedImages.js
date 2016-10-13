@@ -15,7 +15,7 @@ export default class SavedImages extends Component {
       saved: MicrosoftStore.getSaved()
     }
     this._onChange = this._onChange.bind(this);
-    // this._getAllSaved = this._getAllSaved.bind(this);
+    this._audioAnalysis = this._audioAnalysis.bind(this);
   }
   componentWillMount() {
     MicrosoftStore.startListening(this._onChange)
@@ -37,11 +37,10 @@ export default class SavedImages extends Component {
     // console.log('delete!', id)
   }
 
-  // _getAllSaved(){
-  //   ToAPIActions.getSaved()
-  //   this.setState ({
-  //   })
-  // }
+  _audioAnalysis(string){
+    console.log('get Audio Analysis!', string)
+    ToAPIActions.audioAnalyse(string)
+  }
 
   render(){
     const { saved } = this.state;
@@ -64,19 +63,20 @@ export default class SavedImages extends Component {
                   <Image
                     label={{ as: 'a', color: 'red', corner: 'right', icon: 'delete', onClick: () => this._delete(requestId) }}
                     src={image.analysis.Image}
-                    />
+                  />
                   <Card.Header>
                     {description.captions[0].text}
                   </Card.Header>
+                  <Button basic color='green' onClick={() => this._audioAnalysis(image.analysis.String)}>Access Audio Analysis</Button>
                   {/*}<Card.Meta>
                     {created_at}
-                  </Card.Meta>
-                  <Card.Description>
+                    </Card.Meta>
+                    <Card.Description>
                     {text}
-                  </Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                  <div className='ui two buttons'>
+                    </Card.Description>
+                    </Card.Content>
+                    <Card.Content extra>
+                    <div className='ui two buttons'>
                     <Button basic color='green'>Saved</Button>
                     <div onClick = {this._delete.bind(null,id)}><Button basic color='red'>Unsave</Button></div>
                   </div> */}
