@@ -26,15 +26,15 @@ const API ={
     })
     .catch(console.error)
   },
-  //
-  // deleteTweet(id){
-  //   axios.delete(`/api/saved/${id}`)
-  //   .then( res => {
-  //     ServerActions.gotSaved(res.data)
-  //   })
-  //   .catch(console.error)
-  // },
-  //
+
+  deleteImage(id){
+    axios.delete(`/api/saved/${id}`)
+    .then( res => {
+      ServerActions.gotSaved(res.data)
+    })
+    .catch(console.error)
+  },
+
   getSaved(){
     get('/api/saved')
     .then( res => {

@@ -11,9 +11,10 @@ const ToAPIActions = {
     API.saveImage(analysis)
   },
 
-  // deleteTweet(id) {
-  //   API.deleteTweet(id)
-  // },
+  deleteImage(id) {
+    API.deleteImage(id)
+  },
+
   getSaved(){
     API.getSaved()
   }

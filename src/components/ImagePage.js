@@ -84,7 +84,7 @@ export default class ImagePage extends Component {
                 src={image}
                 fluid
                 // label={{ as: 'a', color: 'yellow', content: description.captions[0].text, icon: 'Info Circle', ribbon: true }}
-                label={{ as: 'a', color: 'yellow', content: 'Save', icon: 'save', ribbon: true }} onClick={this._saveImageData.bind(null, textToSpeechString)}/>
+                label={{ as: 'a', color: 'yellow', content: 'Save', icon: 'save', ribbon: true, onClick: this._saveImageData.bind(null, textToSpeechString) }} />
               {/* <Label as='a' basic color='yellow' size='huge'>{description.captions[0].text}</Label> */}
 
               <List animated verticalAlign='middle' size='massive'>

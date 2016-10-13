@@ -36,8 +36,8 @@ exports.deleted = (id) => new Promise ((res, rej) => {
       var data = []
       return rej('failed')
     }
-    let NewData =data.filter( d => {
-      return d.tweet.id != id})
+    let NewData = data.filter( d => {
+      return d.analysis.requestId != id})
     const json = JSON.stringify(NewData)
     fs.writeFile(filename, json, (err) => {
       if (err) throw err
