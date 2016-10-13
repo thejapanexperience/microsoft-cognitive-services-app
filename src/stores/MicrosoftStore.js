@@ -4,7 +4,7 @@ import Storage from '../Storage'
 
 let _analysis = '';
 let _image ='';
-// let _saved = [];
+let _saved =''
 
 class MicrosoftStore extends EventEmitter {
   constructor(){
@@ -19,10 +19,10 @@ class MicrosoftStore extends EventEmitter {
         this.emit('CHANGE');
         break;
 
-        // case 'GOT_SAVED':
-        // _saved = action.payload.saved;
-        // this.emit('CHANGE');
-        // break;
+        case 'GOT_SAVED':
+        _saved = action.payload.saved;
+        this.emit('CHANGE');
+        break;
       }
     })
   }
@@ -43,9 +43,9 @@ class MicrosoftStore extends EventEmitter {
     return _image;
   }
 
-  // getSaved(){
-  //   return _saved;
-  // }
+  getSaved(){
+    return _saved;
+  }
 
 }
 

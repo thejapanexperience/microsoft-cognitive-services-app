@@ -22,7 +22,7 @@ export default class SearchBar extends Component {
       <form className="form-inline" onSubmit = {this._submitForm}>
         <div className="form-group">
           <label className="sr-only" >Tweet Topic</label>
-          <input ref ='input' type="text" className="form-control"  defaultValue="http://i.imgur.com/WdQ2av1.jpg"/>
+          <input ref ='input' type="text" className="form-control"  defaultValue="http://imgview.info/download/20150811/group-of-people-men-women-blonde-smiling-happy-dog-hat-1920x1280.jpg"/>
         </div>
         <span>  </span>
         <button type="submit" className="btn btn-default">Submit Image URL</button>

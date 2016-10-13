@@ -1,23 +1,23 @@
 const express = require('express')
 const router = express.Router()
-const Tweet = require('../models/twitter')
+const Micro = require('../models/models')
 
 
 router.post('/',(req,res) => {
-  Tweet.saveTweet(req.body)
+  Micro.saveAnalysis(req.body)
   .then((data) => {res.send(data)})
   .catch((err) => {res.status(400).send(err)})
-})
+}),
 
-router.delete(`/:id`,(req,res) => {
-  let {id} = req.params;
-  Tweet.deleted(id)
-  .then((data) => {res.send(data)})
-  .catch((err) => {res.status(400).send(err)})
-})
-
+// router.delete(`/:id`,(req,res) => {
+//   let {id} = req.params;
+//   Tweet.deleted(id)
+//   .then((data) => {res.send(data)})
+//   .catch((err) => {res.status(400).send(err)})
+// })
+//
 router.get('/',(req,res) => {
-  Tweet.getSaved()
+  Micro.getSaved()
   .then((data) => {res.send(data)})
   .catch((err) => {res.status(400).send(err)})
 })

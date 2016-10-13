@@ -19,13 +19,13 @@ const API ={
     .catch(console.error)
   },
 
-  // save(tweet){
-  //   post('/api/saved',{tweet})
-  //   .then( res => {
-  //     ServerActions.gotSaved(res.data)
-  //   })
-  //   .catch(console.error)
-  // },
+  saveImage(analysis){
+    post('/api/saved',{analysis})
+    .then( res => {
+      ServerActions.gotSaved(res.data)
+    })
+    .catch(console.error)
+  },
   //
   // deleteTweet(id){
   //   axios.delete(`/api/saved/${id}`)
@@ -35,13 +35,13 @@ const API ={
   //   .catch(console.error)
   // },
   //
-  // getSaved(){
-  //   get('/api/saved')
-  //   .then( res => {
-  //     ServerActions.gotSaved(res.data)
-  //   })
-  //   .catch(console.error)
-  // }
+  getSaved(){
+    get('/api/saved')
+    .then( res => {
+      ServerActions.gotSaved(res.data)
+    })
+    .catch(console.error)
+  }
 }
 
 export default API

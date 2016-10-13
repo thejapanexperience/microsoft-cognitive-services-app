@@ -9,11 +9,11 @@ const ServerActions ={
     })
   },
 
-  // gotSaved(saved){
-  //   AppDispatcher.dispatch({
-  //     type:'GOT_SAVED',
-  //     payload:{saved}
-  //   })
-  // }
+  gotSaved(saved){
+    AppDispatcher.dispatch({
+      type:'GOT_SAVED',
+      payload:{saved}
+    })
+  }
 }
 export default ServerActions;

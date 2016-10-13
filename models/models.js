@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const filename = path.join(__dirname,'../data/twitterList.json');
+const filename = path.join(__dirname,'../data/data.json');
 const uuid = require('uuid');
 
 
@@ -9,7 +9,7 @@ exports.write = function(newData,cb){
   fs.writeFile(filename,json,cb);
 }
 
-exports.saveTweet = (tweet) => new Promise ((res, rej) => {
+exports.saveAnalysis = (analysis) => new Promise ((res, rej) => {
   fs.readFile(filename, (err, buffer) => {
     if (err) return rej(err)
     try {
@@ -18,7 +18,7 @@ exports.saveTweet = (tweet) => new Promise ((res, rej) => {
       var data = []
       return rej('failed')
     }
-    data.push(tweet)
+    data.push(analysis)
     const json = JSON.stringify(data)
     fs.writeFile(filename, json, (err) => {
       if (err) throw err
