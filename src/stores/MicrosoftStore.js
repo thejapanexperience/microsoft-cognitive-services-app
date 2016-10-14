@@ -25,7 +25,7 @@ class MicrosoftStore extends EventEmitter {
             console.log('in Store got new audio file')
             _audiofiles = true
             this.emit('CHANGE')
-          }, 40000)
+          }, 5000)
           break;
 
           case 'GOT_SAVED':
