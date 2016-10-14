@@ -3,8 +3,8 @@ import ServerActions from './actions/ServerActions';
 
 const API ={
   imageAnalyse(url){
-    console.log('in API');
-    console.log('url: ', url)
+    // console.log('in API');
+    // console.log('url: ', url)
     post(`https://api.projectoxford.ai/vision/v1.0/analyze?visualFeatures=Categories,Description,Faces,Tags,ImageType,Color,Adult`, {
       url: url
     }, {

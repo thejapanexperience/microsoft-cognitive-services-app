@@ -49,6 +49,10 @@
     "uuid": "^2.0.3",
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.8.3",
-    "webpack-hot-middleware": "^2.12.2"
+    "webpack-hot-middleware": "^2.12.2",
+    "express-rate-limit": "^2.0.2",
+    "express-secure-only": "^0.2.1",
+    "helmet": "^2.0.0",
+    "watson-developer-cloud": "^1.0.6"
   }
 }
