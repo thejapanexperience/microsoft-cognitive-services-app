@@ -14,6 +14,12 @@ const ServerActions ={
       type:'GOT_SAVED',
       payload:{saved}
     })
+  },
+
+  gotAudio(){
+    AppDispatcher.dispatch({
+      type:'GOT_AUDIO',
+    })
   }
 }
 export default ServerActions;

@@ -12,7 +12,8 @@ export default class SavedImages extends Component {
     super();
 
     this.state = {
-      saved: MicrosoftStore.getSaved()
+      saved: false,
+      counter: MicrosoftStore.getCounter()
     }
     this._onChange = this._onChange.bind(this);
     this._audioAnalysis = this._audioAnalysis.bind(this);
@@ -28,7 +29,8 @@ export default class SavedImages extends Component {
 
   _onChange(){
     this.setState({
-      saved: MicrosoftStore.getSaved()
+      saved: MicrosoftStore.getSaved(),
+      counter: MicrosoftStore.getCounter()
     })
   }
 
@@ -37,57 +39,74 @@ export default class SavedImages extends Component {
     // console.log('delete!', id)
   }
 
-  _audioAnalysis(string){
+  _audioAnalysis(string, requestId){
     console.log('get Audio Analysis!', string)
-    ToAPIActions.audioAnalyse(string)
+    ToAPIActions.audioAnalyse(string, requestId)
   }
 
   render(){
-    const { saved } = this.state;
+    const { saved, counter } = this.state;
     console.log('saved', saved);
-    // if(!bool){
-    //   this._getAllSaved()
-    //   return (<div></div>)
-    // }
+    console.log('rendering');
+    console.log('counter: ', counter)
+
+    if (saved === true) {
+      forceUpdate()
+      console.log('saved: ', saved)
+      this.setState({
+        counter: false
+      })
+
+    }
+
     {if(saved){
       return (
-        <Card.Group>
-          {saved.map( (image, i) => {
-            // // let {created_at, id, text} = save.tweet;
-            // // let image = save.tweet.user.profile_image_url;
-            // // let name = save.tweet.user.name;
-            let { description, requestId } = image.analysis;
-            return (
-              <Card key ={i}>
-                <Card.Content>
-                  <Image
-                    label={{ as: 'a', color: 'red', corner: 'right', icon: 'delete', onClick: () => this._delete(requestId) }}
-                    src={image.analysis.Image}
-                  />
-                  <Card.Header>
-                    {description.captions[0].text}
-                  </Card.Header>
-                  <Button basic color='green' onClick={() => this._audioAnalysis(image.analysis.String)}>Access Audio Analysis</Button>
-                  {/*}<Card.Meta>
-                    {created_at}
-                    </Card.Meta>
-                    <Card.Description>
-                    {text}
-                    </Card.Description>
-                    </Card.Content>
-                    <Card.Content extra>
-                    <div className='ui two buttons'>
-                    <Button basic color='green'>Saved</Button>
-                    <div onClick = {this._delete.bind(null,id)}><Button basic color='red'>Unsave</Button></div>
-                  </div> */}
-                </Card.Content>
-              </Card>
-            )
-          })}
-        </Card.Group>
-      )
-    } else {
-      return (<div></div>)
+        <div className="container">
+
+          <Card.Group>
+
+            {saved.map( (image, i) => {
+              // // let {created_at, id, text} = save.tweet;
+              // // let image = save.tweet.user.profile_image_url;
+              // // let name = save.tweet.user.name;
+              let { description, requestId } = image.analysis;
+              let audioLocation = `../${requestId}.wav`
+              return (
+
+                <Card key ={i}>
+                  <Card.Content>
+                    <Image
+                      label={{ as: 'a', color: 'red', corner: 'right', icon: 'delete', onClick: () => this._delete(requestId) }}
+                      src={image.analysis.Image}
+                    />
+                    <Card.Header>
+                      {description.captions[0].text}
+                    </Card.Header>
+                    <Button basic color='green' onClick={() => this._audioAnalysis(image.analysis.String, requestId)}>Access Audio Analysis</Button>
+                    {/*}<Card.Meta>
+                      {created_at}
+                      </Card.Meta>
+                      <Card.Description>/
+                      {text}
+                      </Card.Description>
+                      </Card.Content>
+                      <Card.Content extra>
+                      <div className='ui two buttons'>
+                      <Button basic color='green'>Saved</Button>
+                      <div onClick = {this._delete.bind(null,id)}><Button basic color='red'>Unsave</Button></div>
+                    </div> */}
+                    <audio preload="auto" controls type="audio/x-wav" src={audioLocation}/>
+
+                  </Card.Content>
+                </Card>
+
+              )
+            })}
+          </Card.Group>
+        </div>
+          )
+          } else {
+            return (<div></div>)
     }
   }
 }

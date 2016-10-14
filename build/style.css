@@ -1,0 +1,6 @@
+audio, canvas, progress, video {
+    display: inline-block;
+    vertical-align: middle;;
+    width: 265px;
+    margin-top: : 30px;
+}

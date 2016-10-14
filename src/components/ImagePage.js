@@ -73,7 +73,7 @@ export default class ImagePage extends Component {
       })
 
 
-      let textToSpeechString = `Hello! How are you today? Thank you for submitting this image to be analysed by our special analyser. This is an image of ${description.captions[0].text} We are quite confident of that. There is a ${description.captions[0].confidence} chance that we are right. There are ${faces.length} people in this image. There is ${peopleList}. Thank you. Have a nice day`
+      let textToSpeechString = `Hello! There is a ${Math.round(description.captions[0].confidence * 100)} percent chance that this is an image of ${description.captions[0].text}.  There is ${peopleList}. Thank you. Have a nice day`
       console.log('textToSpeechString: ', textToSpeechString)
       return (
         <Container>

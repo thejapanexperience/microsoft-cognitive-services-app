@@ -124,8 +124,9 @@ exports.getSaved = () => new Promise ((res, rej) => {
   // })
 })
 
-exports.textToSpeech = () => new Promise ((res, rej) => {
+exports.textToSpeech = (str, id) => new Promise ((res, rej) => {
   console.log('text-to-speech');
+  console.log('str: ', str)
   // Micro.audioAnalyze(req.body.string, res.handle);
   // .then((data) => {res.send(data)})
   // .catch((err) => {res.status(400).send(err)})
@@ -136,11 +137,11 @@ exports.textToSpeech = () => new Promise ((res, rej) => {
   });
 
   var params = {
-    text: 'Hello world.',
+    text: str,
     voice: 'en-US_AllisonVoice',
     accept: 'audio/wav'
   };
 
   // Pipe the synthesized text to a file.
-  text_to_speech.synthesize(params).pipe(fs.createWriteStream('./build/hello_world.wav'))
+  text_to_speech.synthesize(params).pipe(fs.createWriteStream(`./build/${id}.wav`))
 })

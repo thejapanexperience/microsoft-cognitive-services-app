@@ -94,6 +94,17 @@ const API ={
       ServerActions.gotSaved(res.data)
     })
     .catch(console.error)
+  },
+
+  audioAnalyse(string,id){
+    post(`/api/textToSpeech/`, {
+      str: string,
+      id: id
+    })
+    .then( res => {
+      ServerActions.gotAudio(res.data)
+    })
+    .catch(console.error)
   }
 }
 

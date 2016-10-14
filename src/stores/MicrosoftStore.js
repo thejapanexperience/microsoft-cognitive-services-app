@@ -5,6 +5,7 @@ import Storage from '../Storage'
 let _analysis = '';
 let _image ='';
 let _saved =''
+let _audiofiles = false
 
 class MicrosoftStore extends EventEmitter {
   constructor(){
@@ -18,17 +19,17 @@ class MicrosoftStore extends EventEmitter {
           console.log('_analysis: ', _analysis)
           this.emit('CHANGE');
           break;
-        case 'GOT_SAVED':
-          console.log('action.payload.saved', action.payload)
-          // try {
-          //   var data = JSON.parse(action.payload.saved)
-          // } catch (e) {
-          //   var data = [];
-          //   console.log('parse failed');
-          // }
-          // _saved = data;
-          // console.log('_saved', _saved);
 
+          case 'GOT_AUDIO':
+          setTimeout(() => {
+            console.log('in Store got new audio file')
+            _audiofiles = true
+            this.emit('CHANGE')
+          }, 40000)
+          break;
+
+          case 'GOT_SAVED':
+          console.log('action.payload.saved', action.payload)
           _saved = action.payload.saved.map(obj => {
             let data;
             try {
@@ -64,6 +65,10 @@ class MicrosoftStore extends EventEmitter {
 
   getSaved(){
     return _saved;
+  }
+
+  getCounter(){
+    return _audiofiles
   }
 
 }
