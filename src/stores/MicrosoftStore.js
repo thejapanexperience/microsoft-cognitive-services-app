@@ -11,18 +11,36 @@ class MicrosoftStore extends EventEmitter {
     super();
     AppDispatcher.register(action => {
       switch(action.type) {
-        case 'GOT_ANALYSIS':
-        console.log('in MicrosoftStore GOT_ANALYSIS');
-        _analysis = action.payload.data;
-        _image = action.payload.url
-        console.log('_analysis: ', _analysis)
-        this.emit('CHANGE');
-        break;
-
+          case 'GOT_ANALYSIS':
+          console.log('in MicrosoftStore GOT_ANALYSIS');
+          _analysis = action.payload.data;
+          _image = action.payload.url
+          console.log('_analysis: ', _analysis)
+          this.emit('CHANGE');
+          break;
         case 'GOT_SAVED':
-        _saved = action.payload.saved;
-        this.emit('CHANGE');
-        break;
+          console.log('action.payload.saved', action.payload.saved)
+          // try {
+          //   var data = JSON.parse(action.payload.saved)
+          // } catch (e) {
+          //   var data = [];
+          //   console.log('parse failed');
+          // }
+          // _saved = data;
+          // console.log('_saved', _saved);
+          _saved = action.payload.saved.map(obj => {
+            let data;
+            try {
+              data = JSON.parse(obj.analysis);
+            } catch (e) {
+              console.log('parse failed')
+              data = {}
+            }
+            return data;
+          })
+          console.log('_saved', _saved)
+          this.emit('CHANGE');
+          break;
       }
     })
   }
