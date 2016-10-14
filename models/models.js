@@ -12,7 +12,8 @@ const squel = require('squel').useFlavour('mysql');
 const tablename = 'imageAnalytics';
 
 connection.query(`CREATE TABLE IF NOT EXISTS ${tablename} (
-  analysis TEXT
+  analysis TEXT,
+  id TEXT
 )`, err => {
   if (err) throw err;
 });
@@ -23,38 +24,55 @@ exports.write = function(newData,cb) {
 }
 
 exports.saveAnalysis = (analysis) => new Promise ((res, rej) => {
+  // console.log('analysis in models', analysis)
   let analysisStr = JSON.stringify(analysis);
-  console.log('analysis in models', analysis)
+  let analysisId = analysis.analysis.requestId
   let sql = squel.insert()
     .into(tablename)
     .set('analysis', analysisStr)
-    .toString();
+    .set('id', analysisId)
+    .toString()
 
   connection.query(sql, (err, result) => {
+    console.log('result: ', result)
     if(err) return rej(err);
     res(result);
   });
-
-
-
-  // fs.readFile(filename, (err, buffer) => {
-  //   if (err) return rej(err)
-  //   try {
-  //     var data = JSON.parse(buffer)
-  //   } catch (e) {
-  //     var data = []
-  //     return rej('failed')
-  //   }
-  //   data.push(analysis)
-  //   const json = JSON.stringify(data)
-  //   fs.writeFile(filename, json, (err) => {
-  //     if (err) throw err
-  //   })
-  //   res(data)
-  // })
 })
 
-exports.deleted = (id) => new Promise ((res, rej) => {
+// exports.deleted = (idValue) => new Promise ((res, rej) => {
+//   console.log('in models.js')
+//   console.log('id: ', idValue)
+//     let sql = squel.delete()
+//       .from(tablename)
+//       .where(`id = ${idValue}`)
+//       .toString()
+//
+//       connection.query(sql, (err, result) => {
+//         console.log('result: ', result)
+//         if(err) return rej (err)
+//         res(result)
+//       })
+//   })
+
+  exports.deleted = function(idValue) {
+  return new Promise((resolve, reject) => {
+    console.log('tablename: ', tablename)
+    console.log('idValue: ', idValue)
+    let sql = squel.delete()
+      .from(tablename)
+      .where(`id = '${idValue}'`)
+      .toString()
+      console.log('sql: ', sql)
+      connection.query(sql, (err, result) => {
+        console.log('result: ', result)
+        if(err) return reject (err)
+        resolve(result)
+      })
+  })
+}
+
+// }
   // fs.readFile(filename, (err, buffer) => {
   //   if (err) return rej(err)
   //   try {
@@ -71,8 +89,8 @@ exports.deleted = (id) => new Promise ((res, rej) => {
   //     })
   //     res(NewData)
   //   })
-}
-);
+// }
+// );
 
 exports.getSaved = () => new Promise ((res, rej) => {
   console.log('in models getSaved')

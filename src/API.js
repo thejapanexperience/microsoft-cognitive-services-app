@@ -77,16 +77,14 @@ const API ={
     console.log('in API savedImage before post');
     post('/api/saved',{analysis})
     .then( res => {
-      ServerActions.gotSaved(res.data)
+      // ServerActions.gotSaved(res.data)
     })
     .catch(console.error)
   },
 
   deleteImage(id){
     axios.delete(`/api/saved/${id}`)
-    .then( res => {
-      ServerActions.gotSaved(res.data)
-    })
+    .then(this.getSaved)
     .catch(console.error)
   },
 

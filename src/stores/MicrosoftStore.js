@@ -19,7 +19,7 @@ class MicrosoftStore extends EventEmitter {
           this.emit('CHANGE');
           break;
         case 'GOT_SAVED':
-          console.log('action.payload.saved', action.payload.saved)
+          console.log('action.payload.saved', action.payload)
           // try {
           //   var data = JSON.parse(action.payload.saved)
           // } catch (e) {
@@ -28,6 +28,7 @@ class MicrosoftStore extends EventEmitter {
           // }
           // _saved = data;
           // console.log('_saved', _saved);
+
           _saved = action.payload.saved.map(obj => {
             let data;
             try {

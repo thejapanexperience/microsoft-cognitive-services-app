@@ -17,6 +17,7 @@ router.delete(`/:id`,(req,res) => {
 }),
 
 router.post('/',(req,res) => {
+  // console.log('req.body: ', req.body)
   Micro.saveAnalysis(req.body)
   .then((data) => {res.send(data)})
   .catch((err) => {res.status(400).send(err)})
